@@ -1,0 +1,36 @@
+class Usuario {
+    _id: Number;
+    perfil: {
+        nombre: string;
+        apellidos: string;
+        nacimiento: { dia: string, mes: string, ano: string };
+        genero: string;
+        imgUrl: string;
+    };
+    correo: string;
+    contraseña: string;
+    estatus: string;
+    plantas:[{no_planta:Object}]
+    estatusJardin: {
+        luzSolar: Number;
+        agua: Number;
+        temperatura: Number;
+        nivelFerilizante: Number;
+        humedadSuelo: Number;
+        bateria: Number;
+    }
+}
+
+Planta{
+    _id: Number;
+    nombre: String;
+    tipo: String;
+    especie: String;
+    cosecha: Number;
+    profundidadMinima: Number;
+    distanciaPlantas: Number;
+    fertilizante: Number;
+    germinacion: Number;
+    luzSolar: Number;
+    riego: Number;
+}
