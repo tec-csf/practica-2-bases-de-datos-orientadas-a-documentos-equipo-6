@@ -1,20 +1,55 @@
 # TC3041-P2-Primavera-2019
 
 Antony Adrian Morales
+
 Alberto Pascal
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/wasabeef/awesome-android-ui)
 
 Orientaciones para la **Práctica 2. Bases de datos orientadas a documentos**
 
-# Endpoints API
+# MongoDB
+## Contribuir con la base de datos
 
-Ruta Desarrollo: http://127.0.0.1:3500/
+### Configurar el Config Replica Set
+1. Crear una red para el Sharding: `sudo docker network create mongo-sh`
+2. Crear tres contenedores para los nodos del Config Replica Set:
+    - `sudo docker run --name mongo-config1 -d --net mongo-sh mongo --replSet "rsConfig" --configsvr`
+    - `sudo docker run --name mongo-config2 -d --net mongo-sh mongo --replSet "rsConfig" --configsvr`
+    - `sudo docker run --name mongo-config3 -d --net mongo-sh mongo --replSet "rsConfig" --configsvr`
+3. Iniciar una terminal en uno de los nodos: `sudo docker exec -it mongo-config1 bash`
+4. Conectarse a uno de los nodos: `mongo --host mongo-config1 --port 27019`
+5. Inicializar el Config Replica Set: 
+    config = {
+        "_id" : "rsConfig",
+        "configsvr": true,
+        "members" : [
+            {
+                "_id" : 0,
+                "host" : "mongo-config1:27019"
+            },
+            {
+                "_id" : 1,
+                "host" : "mongo-config2:27019"
+            },
+            {
+                "_id" : 2,
+                "host" : "mongo-config3:27019"
+            }
+        ]
+    }
 
-## Revisar estado del api (GET) ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+    rs.initiate(config)
+
+# Aplicación
+## Endpoints API
+
+Ruta Desarrollo: http://127.0.0.1:3500/ 
+
+### Revisar estado del api (GET) ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
     /health
 
-#### Respuesta esperada
+##### Respuesta esperada
     {
     "status": 200,
     "name": "OK",
@@ -22,19 +57,19 @@ Ruta Desarrollo: http://127.0.0.1:3500/
     "customMessage": "API Practica 2 en funcionamiento"
     }
 
-# Errores
+## Errores
 
-## Manejo de Errores
+### Manejo de Errores
 Para manejar errores personalizados hay que crear el error y lanzar un next.
 
 Todos los errores deben pasar por helper/error.helper.js.
 
-### Ejemplo
+#### Ejemplo
     let e = new Error('{mensaje customizado de tu error}');
     e.name = "{ErrorType}";
     return next(e);
 
-### ErrorType
+#### ErrorType
 Código de error  | ErrorType (e.name)
 ------------- | -------------
 301  | movedPermanently
@@ -57,11 +92,11 @@ Código de error  | ErrorType (e.name)
 504  | gatewayTimeout
 507  | insufficientStorage
 
-## Respuesta de errores
+### Respuesta de errores
 Los errores son retornados en JSON. Cada error tiene un **status**, **name**, **message** y **customMessage**.
 El campo **message** es personalizado.
 
-### Ejemplo de un status 400
+#### Ejemplo de un status 400
     {
       "status": 400,
       "name": 'badRequest',
@@ -69,19 +104,19 @@ El campo **message** es personalizado.
       "customMessage": 'Solicitud Erronea'
     }
 
-# Contribuir con el API
+## Contribuir con el API
 
-## Paquetes/Librerias recomendadas (Globales/Locales)
+### Paquetes/Librerias recomendadas (Globales/Locales)
 - Nodejs: `v8.11.3`
 - Nodemon `v1.18.7` (Opcional para testing)
 
-## Iniciar aplicación (Desarrollo)
+### Iniciar aplicación (Desarrollo)
 - `npm install` Instalar paquetes de npm
 - `npm start` Para iniciar con nodemon
 - `npm test` Para iniciar con node
 - `npm run dev` Para iniciar en modo desarrollo (muesta los logs)
 
-## Pasos para correcto funcionamiento del API
+### Pasos para correcto funcionamiento del API
 1. Instalar paquetes/librerias Locales
 2. Descargar el repositorio
 3. Ingresar a la carpeta API
@@ -107,6 +142,7 @@ El campo **message** es personalizado.
 ## Notas
 
 # Changelog
+No hay cambios de ruptura
 
 # Ayuda
 antony999k@hotmail.com
