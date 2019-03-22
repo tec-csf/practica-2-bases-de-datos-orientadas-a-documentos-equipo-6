@@ -137,11 +137,13 @@ sudo docker cp Person_data.json mongo-router:/Person_data.json
 sudo docker cp Country_data.json mongo-router:/Country_data.json
 
 #importar los datos a nuestro router:
-#Primero conectarse al router nuevamente:
+#Primero conectarse al router nuevamente pero esta vez al sh:
 
-sudo docker exec -it mongo-router mongo
+sudo docker exec -it mongo-router sh
 
 #importar
-mongoimport --db practica --collection Company --file company_data.json --jsonArray
-mongoimport --db practica --collection Person --file Person_data.json --jsonArray
-mongoimport --db practica --collection Country --file Country_data.json --jsonArray
+
+mongoimport -d practica -c Country --file /Country_data.json --jsonArray
+mongoimport -d practica -c Person --file /Person_data.json --jsonArray
+mongoimport -d practica -c Company --file /company_data.json --jsonArray
+
