@@ -41,6 +41,7 @@ Orientaciones para la **Práctica 2. Bases de datos orientadas a documentos**
 
     rs.initiate(config)
 ```
+5. Desconectarse del nodo: `exit` `exit`
 
 ## Configurar los Shard Replica Sets
 1. Crear tres contenedores para los nodos del Shard Replica Set:
@@ -71,6 +72,8 @@ config = {
 
 rs.initiate(config)
 ```
+5. Desconectarse del nodo: `exit` `exit`
+
 ## Iniciar el Router
 1. Iniciar router: `sudo docker run  --name mongo-router -d --net mongo-sh mongo  mongos --configdb rsConfig/mongo-config1:27019,mongo-config2:27019,mongo-config3:27019`
 2. Conectarse al router: `sudo docker exec -it mongo-router mongo`
