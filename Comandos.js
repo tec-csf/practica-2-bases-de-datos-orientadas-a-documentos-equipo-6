@@ -125,18 +125,23 @@ sh.shardCollection("practica.Company",  { "CompanyID" : "hashed" } )
 sh.shardCollection("practica.Person",  { "PersonID" : "hashed" } )
 
 
-# Monitorear el estado del clúster
+#Para poder importar los datos es necesario primero pasarlos al contenedor. 
 
-use practica
-sh.status()
-db.printShardingStatus() 
+exit
 
-# Ver las bases de datos con sharding 
+#para copiarlos es necesario moverse a la carpeta donde se encuentran los archivos.
 
-use config
-db.databases.find( { "partitioned": true } )
 
-# Ver la lista de shards
+sudo docker cp company_data.json mongo-router:/company_data.json
+sudo docker cp Person_data.json mongo-router:/Person_data.json
+sudo docker cp Country_data.json mongo-router:/Country_data.json
 
-use admin
-db.adminCommand( { listShards : 1 } )
+#importar los datos a nuestro router:
+#Primero conectarse al router nuevamente:
+
+sudo docker exec -it mongo-router mongo
+
+#importar
+mongoimport --db practica --collection Company --file company_data.json --jsonArray
+mongoimport --db practica --collection Person --file Person_data.json --jsonArray
+mongoimport --db practica --collection Country --file Country_data.json --jsonArray
