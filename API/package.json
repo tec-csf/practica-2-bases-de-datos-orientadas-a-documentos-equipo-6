@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "node app.js",
+    "dev": "DEBUG=dev NODE_ENV=develop nodemon app.js"
+  },
+  "author": "antony999k",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cors": "^2.8.4",
+    "debug": "^4.1.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "helmet": "^3.14.0",
+    "path": "^0.12.7",
+    "request": "^2.88.0"
+  }
+}
