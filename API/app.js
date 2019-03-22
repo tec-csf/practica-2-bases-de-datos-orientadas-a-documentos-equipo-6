@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const helmet = require('helmet');
+let mongoose = require('mongoose');
 const path = require('path');
 const debug = require('debug')('dev');
 require('dotenv').config({path: __dirname + '/.env'})
@@ -20,6 +21,7 @@ app.use(compression()); //Hace el api más ligera y más rápida
 app.use(helmet()); // Añade seguridad a las cabezaras http
 app.use("/user_data", express.static(path.join(__dirname, 'user_data')));
 // DB  =========================================================
+mongoose.connect('mongodb://localhost:27017/practica', {useNewUrlParser: true});
 
 // Rutas =========================================================
 app.use('/', router);

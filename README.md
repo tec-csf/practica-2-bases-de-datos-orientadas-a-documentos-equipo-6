@@ -91,15 +91,16 @@ rs.initiate(config)
     - `sh.shardCollection("practica.Person",  { "PersonID" : "hashed" } )`
 
 ## Importar datos al contenedor
+Ingresar a la carpeta Dataset
 1. Copiar archivos al contenedor: 
-    - `sudo docker cp company_data.json mongo-router:/company_data.json`
-    - `sudo docker cp Person_data.json mongo-router:/Person_data.json`
-    - `sudo docker cp Country_data.json mongo-router:/Country_data.json`
+    - `sudo docker cp Company_dataset.json mongo-router:/Company_data.json`
+    - `sudo docker cp Person_dataset.json mongo-router:/Person_data.json`
+    - `sudo docker cp Country_dataset.json mongo-router:/Country_data.json`
 2. Conectarse al contenedor: `sudo docker exec -it mongo-router sh`
 3. Importar datos: 
     - `mongoimport -d practica -c Country --file /Country_data.json --jsonArray`
     - `mongoimport -d practica -c Person --file /Person_data.json --jsonArray`
-    - `mongoimport -d practica -c Company --file /company_data.json --jsonArray`
+    - `mongoimport -d practica -c Company --file /Company_data.json --jsonArray`
 
 ## Guía de estilos
 ### Mensajes en los Commits de Git
