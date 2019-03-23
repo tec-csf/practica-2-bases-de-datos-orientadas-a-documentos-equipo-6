@@ -12,6 +12,15 @@ Applicación
 
 Ruta Desarrollo: http://127.0.0.1:3500/ 
 
+## Mostrar todas las compañías que pertenezcan al dueño con ID 13 ordenadas según su número de empleados (GET) ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+    /company13
+
+## Personas menores a 40 años que tienen el mismo nombre (GET) ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+    /menor40
+
+## Mostrar todas las Countries con su id y región que tienen un id mayor a 25 y que tienen por nombre antigua y barbuda, marshal isslands o norway ordenado descendentemente (GET) ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+    /countries
+
 ## Revisar estado del api (GET) ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
     /health
 

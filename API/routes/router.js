@@ -10,7 +10,9 @@ const errorHelper = require('../helpers/error.helper');
 
 module.exports = (() => {
   // Queries =========================================================
-  router.get('/person', practicaController.quierie1);
+  router.get('/company13', practicaController.company13);
+  router.get('/menor40', practicaController.menor40);
+  router.get('/countries', practicaController.countries);
 
   // General =========================================================
   //Maneja /

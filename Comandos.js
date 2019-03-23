@@ -98,7 +98,7 @@ exit  # Para salir del contenedor
 # ------ Iniciar el Router -------
 # --------------------------------
 
-sudo docker run  --name mongo-router -d --net mongo-sh mongo  mongos --configdb rsConfig/mongo-config1:27019,mongo-config2:27019,mongo-config3:27019
+sudo docker run  --name mongo-router -d  -p 27017:27017 --net mongo-sh mongo  mongos --configdb rsConfig/mongo-config1:27019,mongo-config2:27019,mongo-config3:27019
 
 # Conectarse al router
 
@@ -143,9 +143,9 @@ sudo docker exec -it mongo-router sh
 
 #importar
 
-mongoimport -d practica -c Country --file /Country_dataset.json --jsonArray
 mongoimport -d practica -c Person --file /Person_dataset.json --jsonArray
 mongoimport -d practica -c Company --file /Company_dataset.json --jsonArray
+mongoimport -d practica -c Country --file /Country_dataset.json --jsonArray
 
 #QUERIES:
 

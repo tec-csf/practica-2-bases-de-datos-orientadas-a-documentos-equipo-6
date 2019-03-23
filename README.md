@@ -75,7 +75,7 @@ rs.initiate(config)
 5. Desconectarse del nodo: `exit` `exit`
 
 ## Iniciar el Router
-1. Iniciar router: `sudo docker run  --name mongo-router -d --net mongo-sh mongo  mongos --configdb rsConfig/mongo-config1:27019,mongo-config2:27019,mongo-config3:27019`
+1. Iniciar router: `sudo docker run  --name mongo-router -d -p 27017:27017 --net mongo-sh mongo  mongos --configdb rsConfig/mongo-config1:27019,mongo-config2:27019,mongo-config3:27019`
 2. Conectarse al router: `sudo docker exec -it mongo-router mongo`
 3. Adicionar Shards al clúster: 
     - `sh.addShard( "rsShard1/mongo-shard11:27018")`
@@ -98,9 +98,9 @@ Ingresar a la carpeta Dataset
     - `sudo docker cp Country_dataset.json mongo-router:/Country_data.json`
 2. Conectarse al contenedor: `sudo docker exec -it mongo-router sh`
 3. Importar datos: 
-    - `mongoimport -d practica -c Country --file /Country_data.json --jsonArray`
     - `mongoimport -d practica -c Person --file /Person_data.json --jsonArray`
     - `mongoimport -d practica -c Company --file /Company_data.json --jsonArray`
+    - `mongoimport -d practica -c Country --file /Country_data.json --jsonArray`
 
 ## Guía de estilos
 ### Mensajes en los Commits de Git
