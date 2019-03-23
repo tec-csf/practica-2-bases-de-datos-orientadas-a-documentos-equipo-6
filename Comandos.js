@@ -143,9 +143,9 @@ sudo docker exec -it mongo-router sh
 
 #importar
 
-mongoimport -d practica -c Country --file /Country_data.json --jsonArray
-mongoimport -d practica -c Person --file /Person_data.json --jsonArray
-mongoimport -d practica -c Company --file /company_data.json --jsonArray
+mongoimport -d practica -c Country --file /Country_dataset.json --jsonArray
+mongoimport -d practica -c Person --file /Person_dataset.json --jsonArray
+mongoimport -d practica -c Company --file /Company_dataset.json --jsonArray
 
 #QUERIES:
 
@@ -153,4 +153,7 @@ mongoimport -d practica -c Company --file /company_data.json --jsonArray
 db.Company.aggregate([{$match:{"OwnerID":13}},{$project:{"OwnerID":1, "Name":1, "No_Employees":1}}, {$sort:{"No_Employees":1}}]).pretty();
 
 #La cantidad de personas menores a 40 años que tienen el mismo nombre. 
-db.Person.aggregate([{$group:{"_id":"$Name", "Cantidad":{"$sum":1}}}, {$match:{"Age":{$lt:40}}}, {$project:{"PersonID":1, "Name":1,"Email":1,"Age":1}}])
+db.Person.aggregate([{$group:{"_id":{Name:"$Name"}, "Cantidad":{"$sum":1}}}, {$match:{"Age":{$lt:40}}}, {$project:{"PersonID":1, "Name":1,"Email":1,"Age":1}}])
+
+#Mostrar todas las Countries con su id y región que tienen un id mayor a 25 y que tienen por nombre antigua y barbuda, marshal isslands o norway ordenado descendentemente
+db.Country.aggregate([{$match:{"CountryID":{$gte:25}, "CountryName":{$in: ["Antigua and Barbuda", "Marshall Islands", "Norway"]}}, {$project:{"CountryID":1,"CountryName":1, "Region":1}}, {$sort: {"CountryID":-1}}}])
