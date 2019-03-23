@@ -21,7 +21,7 @@ app.use(compression()); //Hace el api más ligera y más rápida
 app.use(helmet()); // Añade seguridad a las cabezaras http
 app.use("/user_data", express.static(path.join(__dirname, 'user_data')));
 // DB  =========================================================
-mongoose.connect('mongodb://localhost:27017/practica', {useNewUrlParser: true});
+mongoose.connect('mongodb://mongo-router:27017/practica', {useNewUrlParser: true});
 
 // Rutas =========================================================
 app.use('/', router);
