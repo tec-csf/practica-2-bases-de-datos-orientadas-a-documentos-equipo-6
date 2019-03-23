@@ -147,3 +147,10 @@ mongoimport -d practica -c Country --file /Country_data.json --jsonArray
 mongoimport -d practica -c Person --file /Person_data.json --jsonArray
 mongoimport -d practica -c Company --file /company_data.json --jsonArray
 
+#QUERIES:
+
+#Mostrar todas las compañías que pertenezcan al dueño con ID 13 ordenadas según su número de empleados. 
+db.Company.aggregate([{$match:{"OwnerID":13}},{$project:{"OwnerID":1, "Name":1, "No_Employees":1}}, {$sort:{"No_Employees":1}}]).pretty();
+
+#La cantidad de personas menores a 40 años que tienen el mismo nombre. 
+db.Person.aggregate([{$group:{"_id":"$Name", "Cantidad":{"$sum":1}}}, {$match:{"Age":{$lt:40}}}, {$project:{"PersonID":1, "Name":1,"Email":1,"Age":1}}])
