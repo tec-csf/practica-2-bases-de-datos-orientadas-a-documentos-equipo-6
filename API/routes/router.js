@@ -4,10 +4,14 @@ const express = require('express');
 const router = express.Router();
 //Rutas de controladores
 const globalController = require('../controllers/global.controller');
+const practicaController = require('../controllers/practica.controller');
 //Rutas de helpers
 const errorHelper = require('../helpers/error.helper');
 
 module.exports = (() => {
+  // Queries =========================================================
+  router.get('/user', practicaController.quierie1);
+
   // General =========================================================
   //Maneja /
   router.get('/', globalController.initPath);
